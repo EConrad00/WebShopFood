@@ -30,7 +30,17 @@ namespace WebShopFood.Methods
 
         public static void UpdateCategory() 
         {
-        
+            using (var db = new WebShopFoodContext())
+            {
+                var categoryList = DisplayCategoryNames(db);
+                Console.WriteLine($"{categoryList[0]} - {categoryList[1]} - {categoryList[2]} \nWrite name of category to change:");
+                string productCategory = Console.ReadLine();
+                int productCategoryNew = FindCategoryId(db, productCategory);
+                var category = db.Categories.First(c => c.Id == productCategoryNew);
+                Console.WriteLine("Write new name for category:");
+                category.Name = Console.ReadLine();
+                db.SaveChanges();
+            }
         }
 
         public static void AddProducer()
@@ -49,11 +59,34 @@ namespace WebShopFood.Methods
         }
         public static void DeleteProducer()
         {
-        
+            using (var db = new WebShopFoodContext())
+            {
+                var producerList = DisplayProducerNames(db);
+                foreach (var producer in producerList)
+                {
+                    Console.Write(producer + " - ");
+                }
+                Console.WriteLine("\nWrite name of producer to delete: ");
+                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
+                string productProducer = Console.ReadLine();
+                int productProducerNew = FindProducerId(db, productProducer);
+                db.Remove(db.Producers.Single(p => p.Id == productProducerNew));
+                db.SaveChanges();
+            }
         }
         public static void UpdateProducer()
         {
-        
+            using (var db = new WebShopFoodContext())
+            {
+                var producerList = DisplayProducerNames(db);
+                Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
+                string productProducer = Console.ReadLine();
+                int productProducerNew = FindProducerId(db, productProducer);
+                var producer = db.Producers.First(p => p.Id == productProducerNew);
+                Console.WriteLine("Write new name for producer:");
+                producer.Name = Console.ReadLine();
+                db.SaveChanges();
+            }
         }
         public static void AddProduct()
         {
@@ -84,7 +117,7 @@ namespace WebShopFood.Methods
                     Amount = productAmount
                 };
                 db.Products.Add(product);
-                //db.SaveChanges();
+                db.SaveChanges();
             }
 
         }
@@ -111,6 +144,18 @@ namespace WebShopFood.Methods
                               where Producer.Name == producerName
                               select Producer.Id).FirstOrDefault();
             return producerId;
+        }
+        public static List<string> DisplayCategoryNames(WebShopFoodContext db)
+        {
+            var categoryNames = (from Category in db.Categories
+                              select Category.Name).ToList();
+            return categoryNames;
+        }
+        public static List<string> DisplayProducerNames(WebShopFoodContext db)
+        {
+            var producerNames = (from Producer in db.Producers
+                              select Producer.Name).ToList();
+            return producerNames;
         }
     }
 }
