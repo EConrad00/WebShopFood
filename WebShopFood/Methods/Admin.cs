@@ -25,7 +25,20 @@ namespace WebShopFood.Methods
         }
         public static void DeleteCategory() 
         {
-        
+            using (var db = new WebShopFoodContext())
+            {
+                var categoryList = DisplayCategoryNames(db);
+                foreach (var category in categoryList)
+                {
+                    Console.Write(category + " - ");
+                }
+                Console.WriteLine("\nWrite name of category to delete: ");
+                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
+                string productCategory = Console.ReadLine();
+                int productCategoryNew = FindCategoryId(db, productCategory);
+                db.Remove(db.Categories.Single(c => c.Id == productCategoryNew));
+                db.SaveChanges();
+            }
         }
 
         public static void UpdateCategory() 
