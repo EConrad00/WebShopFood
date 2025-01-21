@@ -18,8 +18,8 @@ namespace WebShopFood.Models
         public virtual Producer Producer { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-        public int ProdAExpDateId { get; set; }
-        public virtual ProductionAndExpirationDate ProducerAndExpirationDate { get; set; }
+        public int ProductionAndExpirationDateId { get; set; }
+        public virtual ProductionAndExpirationDate ProductionAndExpirationDate { get; set; }
 
     }
 }
