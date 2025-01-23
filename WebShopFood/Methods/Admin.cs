@@ -79,8 +79,8 @@ namespace WebShopFood.Methods
                 {
                     Console.Write(producer + " - ");
                 }
-                Console.WriteLine("\nWrite name of producer to delete: ");
                 //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
+                Console.WriteLine("\nWrite name of producer to delete: ");
                 string productProducer = Console.ReadLine();
                 int productProducerNew = FindProducerId(db, productProducer);
                 db.Remove(db.Producers.Single(p => p.Id == productProducerNew));
@@ -157,13 +157,81 @@ namespace WebShopFood.Methods
             using (var db = new WebShopFoodContext())
             {
                 var productList = DisplayProductNames(db);
-                Console.WriteLine($"{productList[0]} \nWrite name of product to change:");
+                foreach (var productGet in productList)
+                {
+                    Console.Write(productGet + " - ");
+                }
+                Console.WriteLine("\nWrite name of product to change: ");
                 string product = Console.ReadLine();
                 int productNew = FindProductId(db, product);
                 var productChanged = db.Products.First(pro => pro.Id == productNew);
-                Console.WriteLine("Write new name for product:");
-                productChanged.Name = Console.ReadLine();
-                db.SaveChanges();
+                var producerName = (from Producer in db.Producers
+                                  where Producer.Id == productChanged.ProducerId
+                                  select Producer.Name).FirstOrDefault();
+                var categoryName = (from Category in db.Categories
+                                  where Category.Id == productChanged.CategoryId
+                                  select Category.Name).FirstOrDefault();
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Press the corresponding number to change that part of the product.");
+                    Console.WriteLine($"1 : |{productChanged.Name}| 2 : |Description{productChanged.Description}| 3 : |Cost {productChanged.Cost}| 4 : |Amount {productChanged.Amount}| 5 : |Chosen {productChanged.Chosen}| 6 : |{producerName}| 7 : |{categoryName}| 8 : To exit");
+                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    switch (key.KeyChar)
+                    {
+                        case '1':
+                            Console.WriteLine("Write new name for product:");
+                            productChanged.Name = Console.ReadLine();
+                            break;
+                        case '2':
+                            Console.WriteLine("Write new description for product:");
+                            productChanged.Description = Console.ReadLine();
+                            break;
+                        case '3':
+                            Console.WriteLine("Write new cost for product:");
+                            productChanged.Cost = int.Parse(Console.ReadLine());
+                            break;
+                        case '4':
+                            Console.WriteLine("Write new amount for product:");
+                            productChanged.Amount = int.Parse(Console.ReadLine());
+                            break;
+                        case '5':
+                            Console.WriteLine("Write y/n if product is chosen");
+                            var tF = Console.ReadLine();
+                            if (tF == "y")
+                            {
+                                productChanged.Chosen = true;
+                            }
+                            else if (tF == "n")
+                            {
+                                productChanged.Chosen = false;
+                            }
+                            break;
+                        case '6':
+                            var producerList = DisplayProducerNames(db);
+                            foreach (var producer in producerList)
+                            {
+                                Console.Write(producer + " - ");
+                            }
+                            Console.WriteLine("Write name of the producer to change to:");
+                            var producerNew = Console.ReadLine();
+                            int productProducerNew = FindProducerId(db, producerNew);
+                            productChanged.ProducerId = productProducerNew;
+                            break;
+                        case '7':
+                            var categoryList = DisplayCategoryNames(db);
+                            Console.WriteLine($"{categoryList[0]} - {categoryList[1]} - {categoryList[2]} \nWrite name of category to change:");
+                            Console.WriteLine("Write name of the category to change to:");
+                            var categoryNew = Console.ReadLine();
+                            int productCategoryNew = FindProducerId(db, categoryNew);
+                            productChanged.CategoryId = productCategoryNew;
+                            break;
+                        case '8':
+                            return;
+
+                    }
+                    db.SaveChanges();    
+                }
             }
         }
         public static void AddCostumer()

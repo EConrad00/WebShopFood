@@ -17,7 +17,7 @@ namespace WebShopFood.Models
         public string City { get; set; }
         public string ZipCode { get; set; }
         public string Country { get; set; }
-        public int Phonenumber { get; set; }
+        public string Phonenumber { get; set; }
         public bool Admin { get; set; }
         public int ShoppingCartId { get; set; }
         public virtual ShoppingCart ShoppingCart { get; set; }

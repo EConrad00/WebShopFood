@@ -9,7 +9,7 @@ namespace WebShopFood.Models
     internal class ShoppingCart
     {
         public int Id { get; set; }
-        public int TotalSum { get; set; }
+        public int? TotalSum { get; set; }
         public virtual ICollection<ShoppingItem> ShoppingItems { get; set; }
     }
 }

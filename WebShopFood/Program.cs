@@ -15,7 +15,7 @@ namespace WebShopFood
             //Methods.Admin.UpdateCategory();
             //Methods.Admin.UpdateProducer();
             //Methods.Admin.DeleteProducer();
-            //Methods.Admin.UpdateProduct();
+            Methods.Admin.UpdateProduct();
             //Methods.Admin.DeleteProduct();
         }
     }
