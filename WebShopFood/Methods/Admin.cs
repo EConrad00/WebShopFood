@@ -134,15 +134,43 @@ namespace WebShopFood.Methods
             }
 
         }
+        public static void DeleteProduct() 
+        {
+            using (var db = new WebShopFoodContext())
+            {
+                var productList = DisplayProductNames(db);
+                foreach (var product in productList)
+                {
+                    Console.Write(product + " - ");
+                }
+                Console.WriteLine("\nWrite name of product to delete: ");
+                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
+                string productToDelete = Console.ReadLine();
+                int productToDeleteNew = FindProducerId(db, productToDelete);
+                db.Remove(db.Products.Single(p => p.Id == productToDeleteNew));
+                db.SaveChanges();
+            }
+        }
+
+        public static void UpdateProduct()
+        {
+            using (var db = new WebShopFoodContext())
+            {
+                var productList = DisplayProductNames(db);
+                Console.WriteLine($"{productList[0]} \nWrite name of product to change:");
+                string product = Console.ReadLine();
+                int productNew = FindProductId(db, product);
+                var productChanged = db.Products.First(pro => pro.Id == productNew);
+                Console.WriteLine("Write new name for product:");
+                productChanged.Name = Console.ReadLine();
+                db.SaveChanges();
+            }
+        }
         public static void AddCostumer()
         {
 
         }
 
-        public static void AddProductionAndExpirationDate() 
-        {
-        
-        }
 
         public static int FindCategoryId(WebShopFoodContext db, string categoryName)
         {
@@ -158,6 +186,13 @@ namespace WebShopFood.Methods
                               select Producer.Id).FirstOrDefault();
             return producerId;
         }
+        public static int FindProductId(WebShopFoodContext db, string productName)
+        {
+            var productId = (from Product in db.Products
+                              where Product.Name == productName
+                              select Product.Id).FirstOrDefault();
+            return productId;
+        }
         public static List<string> DisplayCategoryNames(WebShopFoodContext db)
         {
             var categoryNames = (from Category in db.Categories
@@ -169,6 +204,12 @@ namespace WebShopFood.Methods
             var producerNames = (from Producer in db.Producers
                               select Producer.Name).ToList();
             return producerNames;
+        }
+        public static List<string> DisplayProductNames(WebShopFoodContext db)
+        {
+            var productNames = (from Product in db.Products
+                                 select Product.Name).ToList();
+            return productNames;
         }
     }
 }
