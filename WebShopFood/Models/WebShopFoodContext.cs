@@ -14,7 +14,7 @@ namespace WebShopFood.Models
         //public DbSet<Inventory> Inventory { get; set; }
         public DbSet<Producer> Producers { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductionAndExpirationDate> ProductionAndExpirationDates { get; set; }
+        //public DbSet<ProductionAndExpirationDate> ProductionAndExpirationDates { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingItem> ShoppingItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
