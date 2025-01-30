@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WebShopFood.Models;
@@ -236,10 +239,69 @@ namespace WebShopFood.Methods
         }
         public static void AddCostumer()
         {
+            using (var db = new WebShopFoodContext())
+            {
+                Models.ShoppingCart shoppingCart = new Models.ShoppingCart(){};
+                db.ShoppingCarts.Add(shoppingCart);
+                db.SaveChanges();
+                //var costumerList = DisplayCostumerNames(db);
+                //foreach (var costumerGet in costumerList)
+                //{
+                //    Console.Write(costumerGet + " - ");
+                //}
+                Console.WriteLine("Write username of the costumer:");
+                string costumerId = Console.ReadLine();
+                Console.WriteLine("Write a password:");
+                string costumerPassword = Console.ReadLine();
+                Console.WriteLine("Write the name of the costumer:");
+                string costumerName = Console.ReadLine();
+                Console.WriteLine("Write the gender of the costumer:");
+                string costumerGender = Console.ReadLine();
+                Console.WriteLine("Write the age of the costumer:");
+                int costumerAge = int.Parse(Console.ReadLine());
+                Console.WriteLine("Write the email of the costumer:");
+                string costumerEmail = Console.ReadLine();
+                Console.WriteLine("Write the city of the costumer:");
+                string costumerCity = Console.ReadLine();
+                Console.WriteLine("Write the zipcode of the costumer:");
+                string costumerZipcode = Console.ReadLine();
+                Console.WriteLine("Write the country of the costumer:");
+                string costumerCountry = Console.ReadLine();
+                Console.WriteLine("Write the phonenumber of the costumer:");
+                string costumerPhonenumber = Console.ReadLine();
+                Console.WriteLine("Write y/n if the new user has admin privleges:");
+                string yesNo = Console.ReadLine();
+                bool adminPrivlege = false;
+                if (yesNo == "y")
+                {
+                    adminPrivlege = true;
+                }
+                else 
+                {
+                    adminPrivlege = false;
+                }
+                Models.Costumer costumer = new Models.Costumer()
+                {
+                    Id =costumerId,
+                    Name = costumerName,
+                    Password = costumerPassword,
+                    Gender = costumerGender,
+                    Age = costumerAge,
+                    Email = costumerEmail,
+                    City = costumerCity,
+                    ZipCode = costumerZipcode,
+                    Country = costumerCountry,
+                    Phonenumber = costumerPhonenumber,
+                    Admin = adminPrivlege,
+                    ShoppingCartId = shoppingCart.Id
+                    
+                };
+                db.Costumers.Add(costumer);
+                db.SaveChanges();
+            }
 
         }
-
-
+ 
         public static int FindCategoryId(WebShopFoodContext db, string categoryName)
         {
             var categoryId = (from Category in db.Categories
@@ -279,5 +341,12 @@ namespace WebShopFood.Methods
                                  select Product.Name).ToList();
             return productNames;
         }
+        public static List<string> DisplayCostumerNames(WebShopFoodContext db)
+        {
+            var costumerNames = (from Costumer in db.Costumers
+                                select Costumer.Name).ToList();
+            return costumerNames;
+        }
+
     }
 }
