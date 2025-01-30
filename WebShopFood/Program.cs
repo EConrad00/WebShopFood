@@ -10,6 +10,7 @@ namespace WebShopFood
             //var windowTop = new Window("", 2, 1, topText);
             //windowTop.Draw();
 
+            Methods.Menus.Login();
             //Methods.Admin.AddCategory();
             //Methods.Admin.AddProducer();
             //Methods.Admin.AddProduct();
@@ -18,8 +19,8 @@ namespace WebShopFood
             //Methods.Admin.DeleteProducer();
             //Methods.Admin.UpdateProduct();
             //Methods.Admin.DeleteProduct();
-            Methods.Admin.AddCostumer();
-            
+            //Methods.Admin.AddCostumer();
+
         }
     }
 }
