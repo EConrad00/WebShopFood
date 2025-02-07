@@ -234,10 +234,10 @@ namespace WebShopFood.Methods
                                     Methods.Admin.AddCostumer();
                                     break;
                                 case '2':
-                                    // add udpate costumer
+                                    Methods.Admin.UpdateCostumer();
                                     break;
                                 case '3':
-                                    // add delete costumer
+                                    Methods.Admin.DeleteCostumer();
                                     break;
                                 case '4':
                                     //Console.WriteLine("Leaving");

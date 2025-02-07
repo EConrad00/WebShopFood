@@ -324,6 +324,89 @@ namespace WebShopFood.Methods
             }
         }
 
+        public static void UpdateCostumer()
+        {
+            using (var db = new WebShopFoodContext())
+            {
+                var costumerList = DisplayCostumerNames(db);
+                foreach (var costumerGet in costumerList)
+                {
+                    Console.Write(costumerGet + " - ");
+                }
+                Console.WriteLine("\nWrite name of user to change: ");
+                string costumer = Console.ReadLine();
+                string costumerNew = FindCostumerId(db, costumer);
+                var costumerChanged = db.Costumers.First(c => c.Id == costumerNew);
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Press the corresponding number or letter to change that part of the users information.");
+                    Console.WriteLine($"1 : |{costumerChanged.Id}| 2 : |Password{costumerChanged.Password}| 3 : |Name {costumerChanged.Name}| 4 : |Gender {costumerChanged.Gender}| 5 : |Age {costumerChanged.Age}| 6 : |Email {costumerChanged.Email}| 7 : |City {costumerChanged.City}| 8 : |Zipcode {costumerChanged.ZipCode}| 9 : |Country {costumerChanged.Country}| A : |Admin {costumerChanged.Admin}| B : |Phonenumber {costumerChanged.Phonenumber}| R : To exit");
+                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    switch (key.KeyChar)
+                    {
+                        case '1':
+                            Console.WriteLine("Write new username for the user:");
+                            costumerChanged.Id = Console.ReadLine();
+                            break;
+                        case '2':
+                            Console.WriteLine("Write new password for the user:");
+                            costumerChanged.Password = Console.ReadLine();
+                            break;
+                        case '3':
+                            Console.WriteLine("Write new name for the user:");
+                            costumerChanged.Name = Console.ReadLine();
+                            break;
+                        case '4':
+                            Console.WriteLine("Write new gender for the user:");
+                            costumerChanged.Gender = Console.ReadLine();
+                            break;
+                        case '5':
+                            Console.WriteLine("Write new age for the user:");
+                            costumerChanged.Age = int.Parse(Console.ReadLine());
+                            break;
+                        case '6':
+                            Console.WriteLine("Write new email for the user:");
+                            costumerChanged.Email = Console.ReadLine();
+                            break;
+                        case '7':
+                            Console.WriteLine("Write new city for the user:");
+                            costumerChanged.City = Console.ReadLine();
+                            break;
+                        case '8':
+                            Console.WriteLine("Write new zipcode for the user:");
+                            costumerChanged.ZipCode = Console.ReadLine();
+                            break;
+                        case '9':
+                            Console.WriteLine("Write new country for the user:");
+                            costumerChanged.Country = Console.ReadLine();
+                            break;
+                        case 'a':
+                            Console.WriteLine("Write y/n if user is admin");
+                            var tF = Console.ReadLine();
+                            if (tF == "y")
+                            {
+                                costumerChanged.Admin = true;
+                            }
+                            else if (tF == "n")
+                            {
+                                costumerChanged.Admin = false;
+                            }
+                            break;
+                        case 'b':
+                            Console.WriteLine("Write new phonenumber for the user:");
+                            costumerChanged.Phonenumber = Console.ReadLine();
+                            break;
+                        case 'r':
+                            return;
+
+                    }
+                    db.SaveChanges();
+                }
+            }
+        }
+
+
         public static int FindCategoryId(WebShopFoodContext db, string categoryName)
         {
             var categoryId = (from Category in db.Categories
