@@ -301,7 +301,29 @@ namespace WebShopFood.Methods
             }
 
         }
- 
+
+        public static void DeleteCostumer()
+        {
+            using (var db = new WebShopFoodContext())
+            {
+                var costumerList = DisplayCostumerNames(db);
+                foreach (var costumer in costumerList)
+                {
+                    Console.Write(costumer + " - ");
+                }
+                Console.WriteLine("\nWrite name of costumer to delete: ");
+                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
+                string costumerToDelete = Console.ReadLine();
+                string costumerToDeleteNew = FindCostumerId(db, costumerToDelete);
+                db.Remove(db.Costumers.Single(c => c.Id == costumerToDeleteNew));
+                var shoppingcartIdToDelete = (from Costumer in db.Costumers
+                                              where Costumer.Id == costumerToDeleteNew
+                                              select Costumer.ShoppingCartId).SingleOrDefault();
+                db.Remove(db.ShoppingCarts.Single(s => s.Id == shoppingcartIdToDelete));
+                db.SaveChanges();
+            }
+        }
+
         public static int FindCategoryId(WebShopFoodContext db, string categoryName)
         {
             var categoryId = (from Category in db.Categories
@@ -322,6 +344,14 @@ namespace WebShopFood.Methods
                               where Product.Name == productName
                               select Product.Id).FirstOrDefault();
             return productId;
+        }
+
+        public static string FindCostumerId(WebShopFoodContext db, string costumerName)
+        {
+            var costumerId = (from Costumer in db.Costumers
+                             where Costumer.Name == costumerName
+                             select Costumer.Id).FirstOrDefault();
+            return costumerId;
         }
         public static List<string> DisplayCategoryNames(WebShopFoodContext db)
         {

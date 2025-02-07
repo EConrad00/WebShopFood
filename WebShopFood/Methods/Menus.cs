@@ -34,10 +34,10 @@ namespace WebShopFood.Methods
                             Console.WriteLine($"Welcome back {userId.Name}!");
                             Console.WriteLine("Press enter to continue to the home page!");
                             Console.ReadKey(true);
-                            Menus.StartMenu(userId,ChosenGet());
+                            //Menus.StartMenu(userId,ChosenGet());
                             while (true)
                             {
-
+                                Menus.StartMenu(userId, ChosenGet());
                                 ConsoleKeyInfo key = Console.ReadKey(true);
                                 switch (key.KeyChar)
                                 {
@@ -47,6 +47,7 @@ namespace WebShopFood.Methods
                                     case '2':
                                         break;
                                     case '3':
+                                        Menus.ShoppingCartView(userId);
                                         break;
                                     case '4':
                                         if (userId.Admin == true)
@@ -55,10 +56,43 @@ namespace WebShopFood.Methods
                                         }
                                         break;
                                     case 'a':
+                                        Models.ShoppingItem shoppingItem = new Models.ShoppingItem()
+                                        {
+                                            Quantity = 1,
+                                            Price = ChosenGet()[0].Cost,
+                                            ShoppingCartId = userId.ShoppingCartId,
+                                            ProductId = ChosenGet()[0].Id
+                                        };
+                                        db.ShoppingItems.Add(shoppingItem);
+                                        db.SaveChanges();
+                                        Console.WriteLine("Added one of offer 1 to your shoppingcart!");
+                                        Console.ReadKey(true);
                                         break;
                                     case 'b':
+                                        Models.ShoppingItem shoppingItem2 = new Models.ShoppingItem()
+                                        {
+                                            Quantity = 1,
+                                            Price = ChosenGet()[1].Cost,
+                                            ShoppingCartId = userId.ShoppingCartId,
+                                            ProductId = ChosenGet()[1].Id
+                                        };
+                                        db.ShoppingItems.Add(shoppingItem2);
+                                        db.SaveChanges();
+                                        Console.WriteLine("Added one of offer 2 to your shoppingcart!");
+                                        Console.ReadKey(true);
                                         break;
                                     case 'c':
+                                        Models.ShoppingItem shoppingItem3 = new Models.ShoppingItem()
+                                        {
+                                            Quantity = 1,
+                                            Price = ChosenGet()[2].Cost,
+                                            ShoppingCartId = userId.ShoppingCartId,
+                                            ProductId = ChosenGet()[2].Id
+                                        };
+                                        db.ShoppingItems.Add(shoppingItem3);
+                                        db.SaveChanges();
+                                        Console.WriteLine("Added one of offer 3 to your shoppingcart!");
+                                        Console.ReadKey(true);
                                         break;
                                     case 'q':
                                         Console.WriteLine($"We hope to see you soon again {userId.Name}");
@@ -200,12 +234,13 @@ namespace WebShopFood.Methods
                                     Methods.Admin.AddCostumer();
                                     break;
                                 case '2':
-                                    Methods.Admin.UpdateProduct();
+                                    // add udpate costumer
                                     break;
                                 case '3':
-                                    Methods.Admin.DeleteProduct();
+                                    // add delete costumer
                                     break;
                                 case '4':
+                                    //Console.WriteLine("Leaving");
                                     return;
                             }
                         }
@@ -251,6 +286,32 @@ namespace WebShopFood.Methods
                                   where Product.Chosen == true
                                   select Product).ToList();
                 return chosenList;
+            }
+        }
+
+        public static void ShoppingCartView(Costumer costumer)
+        {
+            using (var db = new WebShopFoodContext())
+            {
+                Console.Clear();
+                var shoppingItemsList = (from ShoppingItem in db.ShoppingItems
+                                         where ShoppingItem.ShoppingCartId == costumer.ShoppingCartId
+                                         select ShoppingItem).ToList();
+                List<string> shoppingItemNamesNoDups = new();
+                foreach (var item in shoppingItemsList) 
+                {
+                    var shoppingItemNames = (from Product in db.Products
+                                             where item.ProductId == Product.Id
+                                             select Product.Name).SingleOrDefault();
+                    shoppingItemNamesNoDups.Add(shoppingItemNames);
+                }
+                shoppingItemNamesNoDups = shoppingItemNamesNoDups.Distinct().ToList();
+                foreach (var itemName in shoppingItemNamesNoDups)
+                {
+                    Console.WriteLine(itemName);
+
+                }
+                Console.ReadKey(true);
             }
         }
     }
