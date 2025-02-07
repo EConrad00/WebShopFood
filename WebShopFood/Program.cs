@@ -10,7 +10,7 @@ namespace WebShopFood
             //var windowTop = new Window("", 2, 1, topText);
             //windowTop.Draw();
 
-            //Methods.Menus.Login();
+            Methods.Menus.Login();
             //Methods.Admin.AddCategory();
             //Methods.Admin.AddProducer();
             //Methods.Admin.AddProduct();

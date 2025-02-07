@@ -35,7 +35,38 @@ namespace WebShopFood.Methods
                             Console.WriteLine("Press enter to continue to the home page!");
                             Console.ReadKey(true);
                             Menus.StartMenu(userId,ChosenGet());
-                            return;
+                            while (true)
+                            {
+
+                                ConsoleKeyInfo key = Console.ReadKey(true);
+                                switch (key.KeyChar)
+                                {
+                                    case '1':
+                                        Menus.StartMenu(userId, ChosenGet());
+                                        break;
+                                    case '2':
+                                        break;
+                                    case '3':
+                                        break;
+                                    case '4':
+                                        if (userId.Admin == true)
+                                        {
+                                            AdminMenu(userId);
+                                        }
+                                        break;
+                                    case 'a':
+                                        break;
+                                    case 'b':
+                                        break;
+                                    case 'c':
+                                        break;
+                                    case 'q':
+                                        Console.WriteLine($"We hope to see you soon again {userId.Name}");
+                                        return;
+                                } 
+                            }
+                            
+                            //return;
                         }
                         else
                         {
@@ -86,7 +117,30 @@ namespace WebShopFood.Methods
                 var windowTop6 = new Window("Menu options", 77, 0, topText6);
                 windowTop6.Draw();
             }
-            Console.ReadKey(true);
+
+            //ConsoleKeyInfo key = Console.ReadKey(true);
+            //switch (key.KeyChar)
+            //{
+            //    case '1':
+            //        break;
+            //    case '2':
+            //        break;
+            //    case '3':
+            //        break;
+            //    case '4':
+            //        if (user.Admin == true) 
+            //        {
+            //            AdminMenu(user);
+            //        }
+            //        break;
+            //    case 'A':
+            //        break;
+            //    case 'B':
+            //        break;
+            //    case 'C':
+            //        break;
+            //}
+            //Console.ReadKey(true);
         }
 
         public static void AdminMenu(Costumer user)
@@ -98,6 +152,9 @@ namespace WebShopFood.Methods
             List<string> topText = new List<string> { "# Food store #" };
             var windowTop = new Window("", 42, 0, topText);
             windowTop.Draw();
+            List<string> topText3 = new List<string> { "1. Products", "2. Categories", "3. Users", "4. Statistics" };
+            var windowTop3 = new Window("Admin funktions", 7, 8, topText3);
+            windowTop3.Draw();
 
         }
 
