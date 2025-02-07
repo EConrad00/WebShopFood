@@ -32,6 +32,7 @@ namespace WebShopFood.Methods
                         if (userPasswordAttempt != null && userPasswordAttempt == userId.Password)
                         {
                             Console.WriteLine($"Welcome back {userId.Name}!");
+                            Console.WriteLine("Press enter to continue to the home page!");
                             Console.ReadKey(true);
                             Menus.StartMenu(userId,ChosenGet());
                             return;

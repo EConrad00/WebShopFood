@@ -17,6 +17,7 @@ namespace WebShopFood.Models
         //public DbSet<ProductionAndExpirationDate> ProductionAndExpirationDates { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingItem> ShoppingItems { get; set; }
+        public DbSet<PurchaseHistory> purchaseHistories { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=WebShopFood;Trusted_Connection=True;TrustServerCertificate=True");
