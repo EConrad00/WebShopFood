@@ -178,7 +178,7 @@ namespace WebShopFood.Methods
                 {
                     Console.Clear();
                     Console.WriteLine("Press the corresponding number to change that part of the product.");
-                    Console.WriteLine($"1 : |{productChanged.Name}| 2 : |Description{productChanged.Description}| 3 : |Cost {productChanged.Cost}| 4 : |Amount {productChanged.Amount}| 5 : |Chosen {productChanged.Chosen}| 6 : |{producerName}| 7 : |{categoryName}| 8 : To exit");
+                    Console.WriteLine($"1: |{productChanged.Name}| 2: |Description {productChanged.Description}| 3: |Cost {productChanged.Cost}| 4: |Amount {productChanged.Amount}| 5: |Chosen {productChanged.Chosen}| 6: |{producerName}| 7: |{categoryName}| 8: To exit");
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     switch (key.KeyChar)
                     {
@@ -341,7 +341,7 @@ namespace WebShopFood.Methods
                 {
                     Console.Clear();
                     Console.WriteLine("Press the corresponding number or letter to change that part of the users information.");
-                    Console.WriteLine($"1 : |{costumerChanged.Id}| 2 : |Password{costumerChanged.Password}| 3 : |Name {costumerChanged.Name}| 4 : |Gender {costumerChanged.Gender}| 5 : |Age {costumerChanged.Age}| 6 : |Email {costumerChanged.Email}| 7 : |City {costumerChanged.City}| 8 : |Zipcode {costumerChanged.ZipCode}| 9 : |Country {costumerChanged.Country}| A : |Admin {costumerChanged.Admin}| B : |Phonenumber {costumerChanged.Phonenumber}| R : To exit");
+                    Console.WriteLine($"1: |{costumerChanged.Id}| 2: |Password {costumerChanged.Password}| 3: |Name {costumerChanged.Name}| 4: |Gender {costumerChanged.Gender}| 5: |Age {costumerChanged.Age}| 6: |Email {costumerChanged.Email}| 7: |City {costumerChanged.City}| 8: |Zipcode {costumerChanged.ZipCode}| 9: |Country {costumerChanged.Country}| A: |Admin {costumerChanged.Admin}| B: |Phonenumber {costumerChanged.Phonenumber}| R: To exit");
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     switch (key.KeyChar)
                     {

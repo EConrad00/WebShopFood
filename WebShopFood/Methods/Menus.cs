@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebShopFood.Models;
 using WebShopFood.Windows;
+using Dapper;
 
 namespace WebShopFood.Methods
 {
@@ -396,9 +397,114 @@ namespace WebShopFood.Methods
                         db.Remove(shoppingItemsCheck5);
                         db.SaveChanges();
                         break;
-                    case '3':
+                    case 'x':
+                        //Console.Clear();
+                        //Console.WriteLine("Please write your name");
+                        //string costumerName = Console.ReadLine();
+                        //Console.WriteLine("Please write your email");
+                        //string costumerEmail = Console.ReadLine();
+                        //Console.WriteLine("Please write your phonenumber");
+                        //string costumerPhonenumber = Console.ReadLine();
+                        //Console.WriteLine("Please write the name of the city you want it sent to");
+                        //string costumerCity = Console.ReadLine();
+                        //Console.WriteLine("Please write the zipcode for where you want it sent to");
+                        //string costumerZipCode = Console.ReadLine();
+                        //Console.WriteLine("Please write the name of the country you want it sent to");
+                        //string costumerCountry = Console.ReadLine();
+                        List<Product> productsChosen = new();
+                        foreach (var item in shoppingItemsList)
+                        {
+                            var shoppingItems = (from Product in db.Products
+                                                     where item.ProductId == Product.Id
+                                                     select Product).SingleOrDefault();
+                            productsChosen.Add(shoppingItems);
+                        }
+                        Console.Clear();
+                        Console.WriteLine("Press 1 to Dhl for 150| Press 2 to UPS 100| Press 3 to cancel purchase");
+                        ConsoleKeyInfo key3 = Console.ReadKey(true);
+                        switch (key3.KeyChar)
+                        {
+                            case '1':
+                                i = 0;
+                                Console.WriteLine("Your shoppingcart\n");
+                                foreach (var itemName in shoppingItemNamesNoDups)
+                                {
+                                    Console.WriteLine($"{itemName} Amount: {shoppingItemsList[i].Quantity}");
+                                    i++;
+
+                                }
+                                var tP = (from sIL in shoppingItemsList
+                                          select sIL.Price * sIL.Quantity).Sum();
+                                Console.WriteLine($"Total price: {(tP * 1.25)+ 150}");
+                                Console.WriteLine("Press 1 to use credit card| Press 2 to use swish| Press 3 to cancel purchase");
+                                ConsoleKeyInfo key4 = Console.ReadKey(true);
+                                switch (key4.KeyChar)
+                                {
+                                    case '1':
+                                        i = 0;
+                                        foreach(var item in shoppingItemsList)
+                                        {
+                                            productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            db.ShoppingItems.Remove(item);
+                                            i++;
+                                        }
+                                        db.SaveChanges();
+                                        return;
+                                    case '2':
+                                        i = 0;
+                                        foreach (var item in shoppingItemsList)
+                                        {
+                                            productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            db.ShoppingItems.Remove(item);
+                                            i++;
+                                        }
+                                        db.SaveChanges();
+                                        return;
+                                }
+                                break;
+                            case '2':
+                                i = 0;
+                                Console.WriteLine("Your shoppingcart\n");
+                                foreach (var itemName in shoppingItemNamesNoDups)
+                                {
+                                    Console.WriteLine($"{itemName} Amount: {shoppingItemsList[i].Quantity}");
+                                    i++;
+
+                                }
+                                var tP2 = (from sIL in shoppingItemsList
+                                          select sIL.Price * sIL.Quantity).Sum();
+                                Console.WriteLine($"Total price: {(tP2 * 1.25) + 100}");
+                                Console.WriteLine("Press 1 to use credit card| Press 2 to use swish| Press 3 to cancel purchase");
+                                ConsoleKeyInfo key5 = Console.ReadKey(true);
+                                switch (key5.KeyChar)
+                                {
+                                    case '1':
+                                        i = 0;
+                                        foreach (var item in shoppingItemsList)
+                                        {
+                                            productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            db.ShoppingItems.Remove(item);
+                                            i++;
+                                        }
+                                        db.SaveChanges();
+                                        return;
+                                    case '2':
+                                        i = 0;
+                                        foreach (var item in shoppingItemsList)
+                                        {
+                                            productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            db.ShoppingItems.Remove(item);
+                                            i++;
+                                        }
+                                        db.SaveChanges();
+                                        return;
+                                }
+                                break;
+                            case '3':
+                                return;
+                        }
                         break;
-                    case 'r':
+                    case '3':
                         return;
 
                         //Console.ReadKey(true);
