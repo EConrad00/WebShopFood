@@ -11,16 +11,7 @@ namespace WebShopFood
             //windowTop.Draw();
 
             Methods.Menus.Login();
-            //Methods.Admin.AddCategory();
-            //Methods.Admin.AddProducer();
-            //Methods.Admin.AddProduct();
-            //Methods.Admin.UpdateCategory();
-            //Methods.Admin.UpdateProducer();
-            //Methods.Admin.DeleteProducer();
-            //Methods.Admin.UpdateProduct();
-            //Methods.Admin.DeleteProduct();
-            //Methods.Admin.DeleteCategory();
-            //Methods.Admin.AddCostumer();
+            
 
         }
     }

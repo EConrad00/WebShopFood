@@ -117,45 +117,130 @@ namespace WebShopFood.Methods
                 var windowTop6 = new Window("Menu options", 77, 0, topText6);
                 windowTop6.Draw();
             }
-
-            //ConsoleKeyInfo key = Console.ReadKey(true);
-            //switch (key.KeyChar)
-            //{
-            //    case '1':
-            //        break;
-            //    case '2':
-            //        break;
-            //    case '3':
-            //        break;
-            //    case '4':
-            //        if (user.Admin == true) 
-            //        {
-            //            AdminMenu(user);
-            //        }
-            //        break;
-            //    case 'A':
-            //        break;
-            //    case 'B':
-            //        break;
-            //    case 'C':
-            //        break;
-            //}
-            //Console.ReadKey(true);
         }
 
         public static void AdminMenu(Costumer user)
         {
-            Console.Clear();
-            List<string> topText2 = new List<string> { $"{user.Name}" };
-            var windowTop2 = new Window("", 7, 0, topText2);
-            windowTop2.Draw();
-            List<string> topText = new List<string> { "# Food store #" };
-            var windowTop = new Window("", 42, 0, topText);
-            windowTop.Draw();
-            List<string> topText3 = new List<string> { "1. Products", "2. Categories", "3. Users", "4. Statistics" };
-            var windowTop3 = new Window("Admin funktions", 7, 8, topText3);
-            windowTop3.Draw();
 
+            while (true)
+            {
+                Console.Clear();
+                List<string> topText2 = new List<string> { $"{user.Name}" };
+                var windowTop2 = new Window("", 7, 0, topText2);
+                windowTop2.Draw();
+                List<string> topText = new List<string> { "# Food store #" };
+                var windowTop = new Window("", 42, 0, topText);
+                windowTop.Draw();
+                List<string> topText3 = new List<string> { "1. Products", "2. Categories", "3. Users", "4. Producers", "5. Statistics" };
+                var windowTop3 = new Window("Admin funktions", 7, 8, topText3);
+                windowTop3.Draw();
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                switch (key.KeyChar)
+                {
+                    case '1':
+
+                        while (true)
+                        {
+                            Console.Clear();
+                            List<string> topText4 = new List<string> { "1. Add new product", "2. Update existing product", "3. Delete existing product", "4. Return" };
+                            var windowTop4 = new Window("Admin funktions", 7, 8, topText4);
+                            windowTop4.Draw();
+                            ConsoleKeyInfo key2 = Console.ReadKey(true);
+                            switch (key2.KeyChar)
+                            {
+                                case '1':
+                                    Methods.Admin.AddProduct();
+                                    break;
+                                case '2':
+                                    Methods.Admin.UpdateProduct();
+                                    break;
+                                case '3':
+                                    Methods.Admin.DeleteProduct();
+                                    break;
+                                case '4':
+                                    return;
+                            } 
+                        }
+                        //break;
+                    case '2':
+                        while (true)
+                        {
+                            Console.Clear();
+                            List<string> topText4 = new List<string> { "1. Add new category", "2. Update existing category", "3. Delete existing category", "4. Return" };
+                            var windowTop4 = new Window("Admin funktions", 7, 8, topText4);
+                            windowTop4.Draw();
+                            ConsoleKeyInfo key2 = Console.ReadKey(true);
+                            switch (key2.KeyChar)
+                            {
+                                case '1':
+                                    Methods.Admin.AddCategory();
+                                    break;
+                                case '2':
+                                    Methods.Admin.UpdateCategory();
+                                    break;
+                                case '3':
+                                    Methods.Admin.DeleteCategory();
+                                    break;
+                                case '4':
+                                    return;
+                            }
+                        }
+                    //break;
+                    case '3':
+                        while (true)
+                        {
+                            Console.Clear();
+                            List<string> topText4 = new List<string> { "1. Add new users", "2. Update existing users", "3. Delete existing users", "4. Return" };
+                            var windowTop4 = new Window("Admin funktions", 7, 8, topText4);
+                            windowTop4.Draw();
+                            ConsoleKeyInfo key2 = Console.ReadKey(true);
+                            switch (key2.KeyChar)
+                            {
+                                case '1':
+                                    Methods.Admin.AddCostumer();
+                                    break;
+                                case '2':
+                                    Methods.Admin.UpdateProduct();
+                                    break;
+                                case '3':
+                                    Methods.Admin.DeleteProduct();
+                                    break;
+                                case '4':
+                                    return;
+                            }
+                        }
+                        //break;
+                    case '4':
+                        while (true)
+                        {
+                            Console.Clear();
+                            List<string> topText4 = new List<string> { "1. Add new producer", "2. Update existing producer", "3. Delete existing producer", "4. Return" };
+                            var windowTop4 = new Window("Admin funktions", 7, 8, topText4);
+                            windowTop4.Draw();
+                            ConsoleKeyInfo key2 = Console.ReadKey(true);
+                            switch (key2.KeyChar)
+                            {
+                                case '1':
+                                    Methods.Admin.AddProducer();
+                                    break;
+                                case '2':
+                                    Methods.Admin.UpdateProducer();
+                                    break;
+                                case '3':
+                                    Methods.Admin.DeleteProducer();
+                                    break;
+                                case '4':
+                                    return;
+                            }
+                        }
+                    //break;
+                    case '5':
+                        break;
+                    case 'q':
+                        Menus.StartMenu(user, ChosenGet());
+                        return;
+                } 
+            }
         }
 
         public static List<Product> ChosenGet()
