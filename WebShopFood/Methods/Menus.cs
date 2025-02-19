@@ -597,55 +597,71 @@ namespace WebShopFood.Methods
                         switch (key2.KeyChar)
                         {
                             case '1':
-                                Shopping.Buying(costumer, products[0].Id);
+                                Shopping.Buying(costumer, products[0]);
                                 break;
                             case '2':
-                                Shopping.Buying(costumer, products[1].Id);
+                                Shopping.Buying(costumer, products[1]);
                                 break;
                             case '3':
-                                Shopping.Buying(costumer, products[2].Id);
+                                Shopping.Buying(costumer, products[2]);
                                 break;
                             case '4':
-                                Shopping.Buying(costumer, products[3].Id);
+                                Shopping.Buying(costumer, products[3]);
                                 break;
                             case '5':
-                                Shopping.Buying(costumer, products[4].Id);
+                                Shopping.Buying(costumer, products[4]);
                                 break;
                             case '6':
                                 break;
                         }
                         break;
                     case '2':
+                        List<string> topText3 = new List<string> { $"1. {products[0].Name}", $"2. {products[1].Name}", $"3. {products[2].Name}", $"4. {products[3].Name} ", $"5. {products[4].Name} ", "6. Return" };
+                        var windowTop3 = new Window($"{categories[0].Name}", 1, 1, topText3);
+                        windowTop3.Draw();
                         ConsoleKeyInfo key3 = Console.ReadKey(true);
                         switch (key3.KeyChar)
                         {
                             case '1':
+                                Shopping.Buying(costumer, products[0]);
                                 break;
                             case '2':
+                                Shopping.Buying(costumer, products[1]);
                                 break;
                             case '3':
+                                Shopping.Buying(costumer, products[2]);
                                 break;
                             case '4':
+                                Shopping.Buying(costumer, products[3]);
                                 break;
                             case '5':
+                                Shopping.Buying(costumer, products[4]);
                                 break;
                             case '6':
                                 break;
                         }
                         break;
                     case '3':
+                        List<string> topText4 = new List<string> { $"1. {products[0].Name}", $"2. {products[1].Name}", $"3. {products[2].Name}", $"4. {products[3].Name} ", $"5. {products[4].Name} ", "6. Return" };
+                        var windowTop4 = new Window($"{categories[0].Name}", 1, 1, topText4);
+                        windowTop4.Draw();
                         ConsoleKeyInfo key4 = Console.ReadKey(true);
                         switch (key4.KeyChar)
                         {
                             case '1':
+                                Shopping.Buying(costumer, products[0]);
                                 break;
                             case '2':
+                                Shopping.Buying(costumer, products[1]);
                                 break;
                             case '3':
+                                Shopping.Buying(costumer, products[2]);
                                 break;
                             case '4':
+                                Shopping.Buying(costumer, products[3]);
                                 break;
                             case '5':
+                                Shopping.Buying(costumer, products[4]);
                                 break;
                             case '6':
                                 break;
