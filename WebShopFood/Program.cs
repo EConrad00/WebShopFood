@@ -1,4 +1,6 @@
-﻿using WebShopFood.Windows;
+﻿using WebShopFood.Methods;
+using WebShopFood.Models;
+using WebShopFood.Windows;
 
 namespace WebShopFood
 {
@@ -6,12 +8,9 @@ namespace WebShopFood
     {
         public static void Main(string[] args)
         {
-            //List<string> topText = new List<string> { "# Fina butiken #", "Allt inom kläder" };
-            //var windowTop = new Window("", 2, 1, topText);
-            //windowTop.Draw();
-
-            Methods.Menus.Login();
             
+            Methods.Menus.Login();
+
 
         }
     }

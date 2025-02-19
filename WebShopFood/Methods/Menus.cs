@@ -308,6 +308,12 @@ namespace WebShopFood.Methods
                         }
                     //break;
                     case '5':
+                        List<PurchaseHistory> purchaseHistories = SqlSearching.PurchaseHistories();
+                        foreach (var product in purchaseHistories)
+                        {
+                            Console.WriteLine(product.ProductName + " " + product.Quantity + " " + product.CostumerGender);
+                        }
+                        Console.ReadKey(true);
                         break;
                     case 'q':
                         Menus.StartMenu(user, ChosenGet());
@@ -402,16 +408,16 @@ namespace WebShopFood.Methods
                         Console.Clear();
                         Console.WriteLine("Please write your name");
                         string costumerName = Console.ReadLine();
-                        Console.WriteLine("Please write your email");
-                        string costumerEmail = Console.ReadLine();
-                        Console.WriteLine("Please write your phonenumber");
-                        string costumerPhonenumber = Console.ReadLine();
+                        //Console.WriteLine("Please write your email");
+                        //string costumerEmail = Console.ReadLine();
+                        //Console.WriteLine("Please write your phonenumber");
+                        //string costumerPhonenumber = Console.ReadLine();
                         Console.WriteLine("Please write the name of the city you want it sent to");
                         string costumerCity = Console.ReadLine();
                         Console.WriteLine("Please write the zipcode for where you want it sent to");
-                        string costumerZipCode = Console.ReadLine();
-                        Console.WriteLine("Please write the name of the country you want it sent to");
-                        string costumerCountry = Console.ReadLine();
+                        //string costumerZipCode = Console.ReadLine();
+                        //Console.WriteLine("Please write the name of the country you want it sent to");
+                        //string costumerCountry = Console.ReadLine();
                         List<Product> productsChosen = new();
                         foreach (var item in shoppingItemsList)
                         {
