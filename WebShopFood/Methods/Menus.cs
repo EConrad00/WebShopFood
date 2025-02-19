@@ -398,19 +398,19 @@ namespace WebShopFood.Methods
                         db.SaveChanges();
                         break;
                     case 'x':
-                        //Console.Clear();
-                        //Console.WriteLine("Please write your name");
-                        //string costumerName = Console.ReadLine();
-                        //Console.WriteLine("Please write your email");
-                        //string costumerEmail = Console.ReadLine();
-                        //Console.WriteLine("Please write your phonenumber");
-                        //string costumerPhonenumber = Console.ReadLine();
-                        //Console.WriteLine("Please write the name of the city you want it sent to");
-                        //string costumerCity = Console.ReadLine();
-                        //Console.WriteLine("Please write the zipcode for where you want it sent to");
-                        //string costumerZipCode = Console.ReadLine();
-                        //Console.WriteLine("Please write the name of the country you want it sent to");
-                        //string costumerCountry = Console.ReadLine();
+                        Console.Clear();
+                        Console.WriteLine("Please write your name");
+                        string costumerName = Console.ReadLine();
+                        Console.WriteLine("Please write your email");
+                        string costumerEmail = Console.ReadLine();
+                        Console.WriteLine("Please write your phonenumber");
+                        string costumerPhonenumber = Console.ReadLine();
+                        Console.WriteLine("Please write the name of the city you want it sent to");
+                        string costumerCity = Console.ReadLine();
+                        Console.WriteLine("Please write the zipcode for where you want it sent to");
+                        string costumerZipCode = Console.ReadLine();
+                        Console.WriteLine("Please write the name of the country you want it sent to");
+                        string costumerCountry = Console.ReadLine();
                         List<Product> productsChosen = new();
                         foreach (var item in shoppingItemsList)
                         {
@@ -445,6 +445,18 @@ namespace WebShopFood.Methods
                                         foreach(var item in shoppingItemsList)
                                         {
                                             productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            Models.PurchaseHistory purchase = new PurchaseHistory()
+                                            {
+                                                CostumerName = costumerName,
+                                                CostumerAge = costumer.Age,
+                                                CostumerCity = costumerCity,
+                                                CostumerGender = costumer.Gender,
+                                                Quantity = item.Quantity,
+                                                Price = item.Price,
+                                                ProductName = db.Products.Single(p => p.Id == item.ProductId).Name
+
+                                            };
+                                            db.purchaseHistories.Add(purchase);
                                             db.ShoppingItems.Remove(item);
                                             i++;
                                         }
@@ -455,6 +467,18 @@ namespace WebShopFood.Methods
                                         foreach (var item in shoppingItemsList)
                                         {
                                             productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            Models.PurchaseHistory purchase = new PurchaseHistory()
+                                            {
+                                                CostumerName = costumerName,
+                                                CostumerAge = costumer.Age,
+                                                CostumerCity = costumerCity,
+                                                CostumerGender = costumer.Gender,
+                                                Quantity = item.Quantity,
+                                                Price = item.Price,
+                                                ProductName = db.Products.Single(p => p.Id == item.ProductId).Name
+
+                                            };
+                                            db.purchaseHistories.Add(purchase);
                                             db.ShoppingItems.Remove(item);
                                             i++;
                                         }
@@ -483,6 +507,18 @@ namespace WebShopFood.Methods
                                         foreach (var item in shoppingItemsList)
                                         {
                                             productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            Models.PurchaseHistory purchase = new PurchaseHistory()
+                                            {
+                                                CostumerName = costumerName,
+                                                CostumerAge = costumer.Age,
+                                                CostumerCity = costumerCity,
+                                                CostumerGender = costumer.Gender,
+                                                Quantity = item.Quantity,
+                                                Price = item.Price,
+                                                ProductName = db.Products.Single(p => p.Id == item.ProductId).Name
+
+                                            };
+                                            db.purchaseHistories.Add(purchase);
                                             db.ShoppingItems.Remove(item);
                                             i++;
                                         }
@@ -493,6 +529,18 @@ namespace WebShopFood.Methods
                                         foreach (var item in shoppingItemsList)
                                         {
                                             productsChosen[i].Amount = productsChosen[i].Amount - item.Quantity;
+                                            Models.PurchaseHistory purchase = new PurchaseHistory()
+                                            {
+                                                CostumerName = costumerName,
+                                                CostumerAge = costumer.Age,
+                                                CostumerCity = costumerCity,
+                                                CostumerGender = costumer.Gender,
+                                                Quantity = item.Quantity,
+                                                Price = item.Price,
+                                                ProductName = db.Products.Single(p => p.Id == item.ProductId).Name
+
+                                            };
+                                            db.purchaseHistories.Add(purchase);
                                             db.ShoppingItems.Remove(item);
                                             i++;
                                         }
