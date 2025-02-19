@@ -120,6 +120,7 @@ namespace WebShopFood.Methods
                 Console.WriteLine("Write name of the category:");
                 string productCategory = Console.ReadLine();
                 int productCategoryNew = FindCategoryId(db, productCategory);
+                
                 //string productProAndExpDate = DateTime.Now.ToString();
                 Console.WriteLine("Write amount of the products:");
                 int productAmount = int.Parse(Console.ReadLine());
@@ -132,6 +133,7 @@ namespace WebShopFood.Methods
                     CategoryId = productCategoryNew,
                     Amount = productAmount
                 };
+                db.Categories.Single(p => p.Id == productCategoryNew).Products.Add(product);
                 db.Products.Add(product);
                 db.SaveChanges();
             }
@@ -226,11 +228,15 @@ namespace WebShopFood.Methods
                             Console.WriteLine($"{categoryList[0]} - {categoryList[1]} - {categoryList[2]} \nWrite name of category to change:");
                             Console.WriteLine("Write name of the category to change to:");
                             var categoryNew = Console.ReadLine();
-                            int productCategoryNew = FindProducerId(db, categoryNew);
+                            int productCategoryNew = FindCategoryId(db, categoryNew);
                             productChanged.CategoryId = productCategoryNew;
                             break;
                         case '8':
                             return;
+                        case '9':
+                            int categoryId = FindCategoryId(db, categoryName);
+                            db.Categories.Single(p => p.Id == categoryId).Products.Add(productChanged);
+                            break;
 
                     }
                     db.SaveChanges();    

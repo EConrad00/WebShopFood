@@ -46,6 +46,7 @@ namespace WebShopFood.Methods
                                         Menus.StartMenu(userId, ChosenGet());
                                         break;
                                     case '2':
+                                        Menus.CategoryMenu(userId);
                                         break;
                                     case '3':
                                         Menus.ShoppingCartView(userId);
@@ -557,6 +558,113 @@ namespace WebShopFood.Methods
 
                         //Console.ReadKey(true);
                 }
+            }
+        }
+
+        public static void CategoryMenu(Costumer costumer)
+        {
+            //Console.WriteLine("Press 1 to use credit card| Press 2 to use swish| Press 3 to cancel purchase");
+            using (var db = new WebShopFoodContext())
+            {
+                Console.Clear();
+                var categoryList = Admin.DisplayCategoryNames(db);
+                List<Category> categories = new List<Category>();
+                List<Product> products = new List<Product>();
+                foreach (var categoryGet in categoryList)
+                {
+                    int categoryId = Admin.FindCategoryId(db, categoryGet);
+                    categories.Add(db.Categories.Single(p => p.Id == categoryId));
+                }
+
+                List<string> topText = new List<string> { $"1. {categories[0].Name}", $"2. {categories[1].Name}", $"3. {categories[2].Name}", "4. Free search", "5. Return" };
+                var windowTop = new Window("Categories", 1, 1, topText);
+                windowTop.Draw();
+                ConsoleKeyInfo key1 = Console.ReadKey(true);
+                switch (key1.KeyChar)
+                {
+                    case '1':
+                        Console.Clear();
+                        products.Clear();
+                        foreach (var productGet in db.Products.Where(x => x.CategoryId == categories[0].Id))
+                        {
+                            //int categoryId = Admin.FindProductId(db, productGet);
+                            products.Add(productGet);
+                        }
+                        List<string> topText2 = new List<string> { $"1. {products[0].Name}", $"2. {products[1].Name}", $"3. {products[2].Name}", $"4. {products[3].Name} ", $"5. {products[4].Name} ", "6. Return" };
+                        var windowTop2 = new Window($"{categories[0].Name}", 1, 1, topText2);
+                        windowTop2.Draw();
+                        ConsoleKeyInfo key2 = Console.ReadKey(true);
+                        switch (key2.KeyChar)
+                        {
+                            case '1':
+                                Shopping.Buying(costumer, products[0].Id);
+                                break;
+                            case '2':
+                                Shopping.Buying(costumer, products[1].Id);
+                                break;
+                            case '3':
+                                Shopping.Buying(costumer, products[2].Id);
+                                break;
+                            case '4':
+                                Shopping.Buying(costumer, products[3].Id);
+                                break;
+                            case '5':
+                                Shopping.Buying(costumer, products[4].Id);
+                                break;
+                            case '6':
+                                break;
+                        }
+                        break;
+                    case '2':
+                        ConsoleKeyInfo key3 = Console.ReadKey(true);
+                        switch (key3.KeyChar)
+                        {
+                            case '1':
+                                break;
+                            case '2':
+                                break;
+                            case '3':
+                                break;
+                            case '4':
+                                break;
+                            case '5':
+                                break;
+                            case '6':
+                                break;
+                        }
+                        break;
+                    case '3':
+                        ConsoleKeyInfo key4 = Console.ReadKey(true);
+                        switch (key4.KeyChar)
+                        {
+                            case '1':
+                                break;
+                            case '2':
+                                break;
+                            case '3':
+                                break;
+                            case '4':
+                                break;
+                            case '5':
+                                break;
+                            case '6':
+                                break;
+                        }
+                        break;
+                    case '4':
+                        ConsoleKeyInfo key5 = Console.ReadKey(true);
+                        switch (key5.KeyChar)
+                        {
+                            case '1':
+                                break;
+                            case '2':
+                                break;
+                        }
+                        break;
+                    case '5':
+                        break;
+                    
+                } 
             }
         }
     }
