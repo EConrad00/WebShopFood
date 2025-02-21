@@ -13,7 +13,7 @@ namespace WebShopFood.Methods
     {
         static string connString = "data source=.\\SQLEXPRESS; initial catalog=WebShopFood; persist security info=True; Integrated Security=True;TrustServerCertificate=true;";
 
-        public static List<PurchaseHistory> PurchaseHistories(string sql)
+        public static async Task<List<PurchaseHistory>> PurchaseHistories(string sql)
         {
             List<PurchaseHistory> purchases = new List<PurchaseHistory>();
 
@@ -24,7 +24,7 @@ namespace WebShopFood.Methods
             return purchases;
         }
 
-        public static void FreeSearch(Costumer costumer, WebShopFoodContext db)
+        public static async Task<List<Product>> FreeSearch()
         {
             Console.WriteLine("Please write to search for a product by its name:");
             string nameToSearchBy = Console.ReadLine();
@@ -34,8 +34,8 @@ namespace WebShopFood.Methods
             {
                 products = connection.Query<Product>(sqlSearch).ToList();
             }
-
-            Shopping.Buying(costumer, products[0]);
+            return products;
+            
         }
     }
 }

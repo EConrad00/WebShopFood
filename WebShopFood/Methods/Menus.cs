@@ -192,7 +192,7 @@ namespace WebShopFood.Methods
             }
         }
 
-        public static void AdminMenu(Costumer user)
+        public static async void AdminMenu(Costumer user)
         {
 
             while (true)
@@ -309,14 +309,14 @@ namespace WebShopFood.Methods
                     //break;
                     case '5':
                         string sql = "SELECT ProductName,SUM(Quantity) AS Quantity FROM PurchaseHistories GROUP BY ProductName ORDER BY SUM(Quantity) DESC";
-                        List<PurchaseHistory> purchaseHistories = SqlSearching.PurchaseHistories(sql);
+                        List<PurchaseHistory> purchaseHistories = await SqlSearching.PurchaseHistories(sql);
                         Console.WriteLine("Products by most popular:");
                         foreach (var product in purchaseHistories)
                         {
                             Console.WriteLine(product.ProductName + " " + product.Quantity + " " + product.CostumerGender);
                         }
                         sql = "WITH RankedProducts AS (\r\n    SELECT ProductName AS ProductName,\r\n           SUM(Quantity) AS Quantity,\r\n           CostumerGender AS CostumerGender,\r\n           ROW_NUMBER() OVER (PARTITION BY CostumerGender ORDER BY SUM(Quantity) DESC) AS Rank\r\n    FROM purchaseHistories\r\n    GROUP BY CostumerGender, ProductName\r\n)\r\nSELECT ProductName, Quantity, CostumerGender\r\nFROM RankedProducts\r\nWHERE Rank = 1;";
-                        purchaseHistories = SqlSearching.PurchaseHistories(sql);
+                        purchaseHistories = await SqlSearching.PurchaseHistories(sql);
                         Console.WriteLine("Most popular product by gender:");
                         foreach (var product in purchaseHistories)
                         {
@@ -576,7 +576,7 @@ namespace WebShopFood.Methods
             }
         }
 
-        public static void CategoryMenu(Costumer costumer)
+        public static async void CategoryMenu(Costumer costumer)
         {
             //Console.WriteLine("Press 1 to use credit card| Press 2 to use swish| Press 3 to cancel purchase");
             using (var db = new WebShopFoodContext())
@@ -683,7 +683,9 @@ namespace WebShopFood.Methods
                         }
                         break;
                     case '4':
-                        SqlSearching.FreeSearch(costumer, db);
+                        products.Clear();
+                        products = await SqlSearching.FreeSearch();
+                        Shopping.Buying(costumer, products[0]);
                         break;
                     case '5':
                         ConsoleKeyInfo key5 = Console.ReadKey(true);
