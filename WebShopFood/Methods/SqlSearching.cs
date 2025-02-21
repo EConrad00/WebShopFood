@@ -11,7 +11,7 @@ namespace WebShopFood.Methods
 {
     internal class SqlSearching
     {
-        static string connString = "data source=.\\SQLEXPRESS; initial catalog=WebShopFood; persist security info=True; Integrated Security=True;TrustServerCertificate=true;";
+        static string connString = "data source=tcp:ecdatabas1.database.windows.net,1433;Initial Catalog=EcDatabase;Persist Security Info=False;User ID=SqlAdmin;Password=248Password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public static async Task<List<PurchaseHistory>> PurchaseHistories(string sql)
         {

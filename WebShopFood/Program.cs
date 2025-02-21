@@ -11,7 +11,6 @@ namespace WebShopFood
             
             Methods.Menus.Login();
 
-
         }
     }
 }

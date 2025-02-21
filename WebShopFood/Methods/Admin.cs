@@ -36,7 +36,6 @@ namespace WebShopFood.Methods
                     Console.Write(category + " - ");
                 }
                 Console.WriteLine("\nWrite name of category to delete: ");
-                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
                 string productCategory = Console.ReadLine();
                 int productCategoryNew = FindCategoryId(db, productCategory);
                 db.Remove(db.Categories.Single(c => c.Id == productCategoryNew));
@@ -82,7 +81,6 @@ namespace WebShopFood.Methods
                 {
                     Console.Write(producer + " - ");
                 }
-                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
                 Console.WriteLine("\nWrite name of producer to delete: ");
                 string productProducer = Console.ReadLine();
                 int productProducerNew = FindProducerId(db, productProducer);
@@ -120,8 +118,6 @@ namespace WebShopFood.Methods
                 Console.WriteLine("Write name of the category:");
                 string productCategory = Console.ReadLine();
                 int productCategoryNew = FindCategoryId(db, productCategory);
-                
-                //string productProAndExpDate = DateTime.Now.ToString();
                 Console.WriteLine("Write amount of the products:");
                 int productAmount = int.Parse(Console.ReadLine());
                 Models.Product product = new Models.Product()
@@ -149,7 +145,6 @@ namespace WebShopFood.Methods
                     Console.Write(product + " - ");
                 }
                 Console.WriteLine("\nWrite name of product to delete: ");
-                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
                 string productToDelete = Console.ReadLine();
                 int productToDeleteNew = FindProducerId(db, productToDelete);
                 db.Remove(db.Products.Single(p => p.Id == productToDeleteNew));
@@ -250,11 +245,7 @@ namespace WebShopFood.Methods
                 Models.ShoppingCart shoppingCart = new Models.ShoppingCart(){};
                 db.ShoppingCarts.Add(shoppingCart);
                 db.SaveChanges();
-                //var costumerList = DisplayCostumerNames(db);
-                //foreach (var costumerGet in costumerList)
-                //{
-                //    Console.Write(costumerGet + " - ");
-                //}
+
                 Console.WriteLine("Write username of the costumer:");
                 string costumerId = Console.ReadLine();
                 Console.WriteLine("Write a password:");
@@ -318,7 +309,6 @@ namespace WebShopFood.Methods
                     Console.Write(costumer + " - ");
                 }
                 Console.WriteLine("\nWrite name of costumer to delete: ");
-                //Console.WriteLine($"{producerList[0]} - {producerList[1]} - {producerList[2]} \nWrite name of producer to change:");
                 string costumerToDelete = Console.ReadLine();
                 string costumerToDeleteNew = FindCostumerId(db, costumerToDelete);
                 db.Remove(db.Costumers.Single(c => c.Id == costumerToDeleteNew));

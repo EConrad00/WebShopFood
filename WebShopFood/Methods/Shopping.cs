@@ -10,7 +10,7 @@ namespace WebShopFood.Methods
 {
     internal class Shopping
     {
-        public static void Buying(Costumer userId, /*int productId*/ Product product)
+        public static void Buying(Costumer userId, Product product)
         {
             using (var db = new WebShopFoodContext())
             {
