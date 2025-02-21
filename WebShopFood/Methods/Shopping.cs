@@ -41,7 +41,8 @@ namespace WebShopFood.Methods
                         shoppingItemsCheck[0].Quantity = shoppingItemsCheck[0].Quantity + 1;
                         db.SaveChanges();
                     }
-                    Console.WriteLine($"Added one of {db.Products.Where(x => x.Id == product.Id).Select(x => x.Name).SingleOrDefault()} to your shoppingcart!");
+                    Console.WriteLine($"Added one of {db.Products.Where(x => x.Id == product.Id).Select(x => x.Name).SingleOrDefault()} to your shoppingcart!                            ");
+                    Console.WriteLine("                                               ");
                     Console.ReadKey(true);
                 }
                 

@@ -26,5 +26,19 @@ namespace WebShopFood.Methods
             }
             return purchases;
         }
+
+        public static void FreeSearch(Costumer costumer, WebShopFoodContext db)
+        {
+            Console.WriteLine("Please write to search for a product by its name:");
+            string nameToSearchBy = Console.ReadLine();
+            string sqlSearch = $"Select Top(1) * From Products Where Name Like '%{nameToSearchBy}%'";
+            List<Product> products = new List<Product>();
+            using (var connection = new SqlConnection(connString))
+            {
+                products = connection.Query<Product>(sqlSearch).ToList();
+            }
+
+            Shopping.Buying(costumer, products[0]);
+        }
     }
 }

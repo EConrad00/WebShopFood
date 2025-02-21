@@ -674,6 +674,9 @@ namespace WebShopFood.Methods
                         }
                         break;
                     case '4':
+                        SqlSearching.FreeSearch(costumer, db);
+                        break;
+                    case '5':
                         ConsoleKeyInfo key5 = Console.ReadKey(true);
                         switch (key5.KeyChar)
                         {
@@ -682,8 +685,6 @@ namespace WebShopFood.Methods
                             case '2':
                                 break;
                         }
-                        break;
-                    case '5':
                         break;
                     
                 } 
