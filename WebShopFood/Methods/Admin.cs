@@ -133,8 +133,8 @@ namespace WebShopFood.Methods
                     CategoryId = productCategoryNew,
                     Amount = productAmount
                 };
-                db.Categories.Single(p => p.Id == productCategoryNew).Products.Add(product);
                 db.Products.Add(product);
+                db.Categories.Single(p => p.Id == productCategoryNew).Products.Add(product);
                 db.SaveChanges();
             }
 

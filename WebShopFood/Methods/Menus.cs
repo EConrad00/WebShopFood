@@ -631,6 +631,13 @@ namespace WebShopFood.Methods
                         }
                         break;
                     case '2':
+                        Console.Clear();
+                        products.Clear();
+                        foreach (var productGet in db.Products.Where(x => x.CategoryId == categories[1].Id))
+                        {
+                            //int categoryId = Admin.FindProductId(db, productGet);
+                            products.Add(productGet);
+                        }
                         List<string> topText3 = new List<string> { $"1. {products[0].Name}", $"2. {products[1].Name}", $"3. {products[2].Name}", $"4. {products[3].Name} ", $"5. {products[4].Name} ", "6. Return" };
                         var windowTop3 = new Window($"{categories[0].Name}", 1, 1, topText3);
                         windowTop3.Draw();
@@ -657,6 +664,13 @@ namespace WebShopFood.Methods
                         }
                         break;
                     case '3':
+                        Console.Clear();
+                        products.Clear();
+                        foreach (var productGet in db.Products.Where(x => x.CategoryId == categories[2].Id))
+                        {
+                            //int categoryId = Admin.FindProductId(db, productGet);
+                            products.Add(productGet);
+                        }
                         List<string> topText4 = new List<string> { $"1. {products[0].Name}", $"2. {products[1].Name}", $"3. {products[2].Name}", $"4. {products[3].Name} ", $"5. {products[4].Name} ", "6. Return" };
                         var windowTop4 = new Window($"{categories[0].Name}", 1, 1, topText4);
                         windowTop4.Draw();
