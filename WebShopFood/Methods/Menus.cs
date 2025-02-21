@@ -308,7 +308,16 @@ namespace WebShopFood.Methods
                         }
                     //break;
                     case '5':
-                        List<PurchaseHistory> purchaseHistories = SqlSearching.PurchaseHistories();
+                        string sql = "SELECT ProductName,SUM(Quantity) AS Quantity FROM PurchaseHistories GROUP BY ProductName ORDER BY SUM(Quantity) DESC";
+                        List<PurchaseHistory> purchaseHistories = SqlSearching.PurchaseHistories(sql);
+                        Console.WriteLine("Products by most popular:");
+                        foreach (var product in purchaseHistories)
+                        {
+                            Console.WriteLine(product.ProductName + " " + product.Quantity + " " + product.CostumerGender);
+                        }
+                        sql = "WITH RankedProducts AS (\r\n    SELECT ProductName AS ProductName,\r\n           SUM(Quantity) AS Quantity,\r\n           CostumerGender AS CostumerGender,\r\n           ROW_NUMBER() OVER (PARTITION BY CostumerGender ORDER BY SUM(Quantity) DESC) AS Rank\r\n    FROM purchaseHistories\r\n    GROUP BY CostumerGender, ProductName\r\n)\r\nSELECT ProductName, Quantity, CostumerGender\r\nFROM RankedProducts\r\nWHERE Rank = 1;";
+                        purchaseHistories = SqlSearching.PurchaseHistories(sql);
+                        Console.WriteLine("Most popular product by gender:");
                         foreach (var product in purchaseHistories)
                         {
                             Console.WriteLine(product.ProductName + " " + product.Quantity + " " + product.CostumerGender);
